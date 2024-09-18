@@ -1,0 +1,19 @@
+.navbar-brand{
+    padding: 5px 10px;    
+    border-radius: 15px;
+
+}
+
+.nav-link{
+    cursor: pointer;    
+    margin-left: 25px;    
+    
+}
+.nav-link:hover{
+    text-decoration: underline;
+
+}
+
+#navbarNav{
+    margin-left: 45%;
+}
