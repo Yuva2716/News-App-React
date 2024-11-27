@@ -9,7 +9,18 @@ const NewsArea = ( {category} ) => {
         
         fetch(url)
         .then(response => response.json())
-        .then(data => setArticles(data.articles));
+        .then(data => {
+            if(data.articles){
+                setArticles(data.articles)       
+            }else {
+                setArticles([])
+            }
+        })
+        .catch(error =>{
+            console.error("Error fetching data: ", error)
+            setArticles([])
+        })        
+        
                 
     },[category])
 
@@ -20,17 +31,21 @@ const NewsArea = ( {category} ) => {
         <h2 className="text-center">
             <span className="badge bg-danger mt-2">Breaking News!!!</span>
         </h2>
-        {articles.map((news,index)=>{
-    return (
-        <NewsItems
-            key={index}
-            title={news.title}
-            description={news.description}
-            src={news.urlToImage}
-            url={news.url}
-        />
-    ) 
-})}
+        {articles.length > 0 ? ( 
+	articles.map((news, index) => { 
+		return ( 
+			<NewsItems
+				key={index} 
+				title={news.title} 
+				description={news.description} 
+				src={news.urlToImage} 
+				url={news.url}
+			/>
+		);
+	})
+) : (
+	<p>No news available</p>
+)}
     </div>
   )
 }
